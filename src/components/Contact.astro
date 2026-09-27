@@ -1,8 +1,5 @@
 ---
-const email = "RenzRamido@gmail.com";
-const linkedin = "https://www.linkedin.com/in/renz-rodney-ramido-8256a8387";
-// Booking: swap this for the Calendly link once it exists. Until then it opens an email.
-const booking = `mailto:${email}?subject=${encodeURIComponent("Book a 30 minute call")}`;
+import { email, linkedin, booking } from "../data/site.js";
 ---
 
 <section class="section contact dark" id="contact">
@@ -15,7 +12,7 @@ const booking = `mailto:${email}?subject=${encodeURIComponent("Book a 30 minute 
         the right person for it, I will say so.
       </p>
 
-      <a class="btn btn--light" href={booking} data-reveal style="--delay:150ms">
+      <a class="btn btn--light" href={booking} target="_blank" rel="noopener noreferrer" data-reveal style="--delay:150ms">
         Book a 30 minute call
       </a>
 

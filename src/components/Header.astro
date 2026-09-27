@@ -1,4 +1,6 @@
 ---
+import { booking } from "../data/site.js";
+
 const links = [
   { label: "Home", href: "#top" },
   { label: "Services", href: "#services" },
@@ -25,7 +27,7 @@ const links = [
           ))
         }
       </ul>
-      <a class="btn btn--sm" href="#contact">Book a call</a>
+      <a class="btn btn--sm" href={booking} target="_blank" rel="noopener noreferrer">Book a call</a>
     </nav>
 
     <button class="burger" data-menu-toggle aria-expanded="false" aria-label="Open menu">

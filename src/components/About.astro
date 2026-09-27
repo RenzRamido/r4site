@@ -9,14 +9,15 @@ const notFit = [
 <section class="section about" id="about">
   <div class="wrap about__grid">
     <div class="about__media" data-reveal>
-      <!-- Replace the contents of .portrait with <img src="/portrait.jpg" alt="Renz Rodney Ramido" /> -->
       <div class="portrait">
-        <svg viewBox="0 0 400 400" aria-hidden="true">
-          <g stroke="#1e2a4a" stroke-width="1">
-            <path d="M0 100 H400 M0 200 H400 M0 300 H400 M100 0 V400 M200 0 V400 M300 0 V400"></path>
-          </g>
-          <text x="200" y="215" text-anchor="middle" class="portrait__mark">R4</text>
-        </svg>
+        <img
+          src="/portrait.jpg"
+          alt="Renz Rodney Ramido"
+          width="1101"
+          height="1187"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
       <p class="portrait__cap">Renz Rodney Ramido, operator</p>
     </div>
@@ -69,7 +70,7 @@ const notFit = [
 
   .about__grid {
     display: grid;
-    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
     gap: clamp(32px, 5vw, 80px);
   }
 
@@ -79,29 +80,15 @@ const notFit = [
   }
 
   .portrait {
-    aspect-ratio: 1 / 1;
     background: var(--navy);
     border-radius: 6px;
     overflow: hidden;
   }
 
-  .portrait :global(img) {
+  .portrait img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .portrait svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  .portrait__mark {
-    font-family: var(--mono);
-    font-size: 96px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    fill: #fff;
+    height: auto;
+    display: block;
   }
 
   .portrait__cap {
@@ -193,7 +180,7 @@ const notFit = [
 
     .about__media {
       position: static;
-      max-width: 280px;
+      max-width: 420px;
     }
   }
 </style>

@@ -1,4 +1,6 @@
 ---
+import { booking } from "../data/site.js";
+
 const stages = ["Capture", "Qualify", "Quote", "Book", "Deliver", "Report"];
 ---
 
@@ -51,7 +53,7 @@ const stages = ["Capture", "Qualify", "Quote", "Book", "Deliver", "Report"];
       </p>
 
       <div class="hero__cta" data-reveal style="--delay:220ms">
-        <a class="btn btn--light" href="#contact">Book a 30 minute call</a>
+        <a class="btn btn--light" href={booking} target="_blank" rel="noopener noreferrer">Book a 30 minute call</a>
         <p class="hero__note">
           No pitch. Tell me what is broken or what you keep doing by hand, and I will tell you what
           I would do about it.
