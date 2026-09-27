@@ -1,0 +1,220 @@
+---
+const { kind } = Astro.props;
+const arw = `arw-${kind}`;
+const boxes = {
+  intake: [
+    [10, 54, 110, 46, "Intake form"],
+    [150, 54, 110, 46, "Pricing rules"],
+    [290, 54, 110, 46, "AI estimate"],
+    [430, 54, 110, 46, "Quote sent"],
+    [430, 190, 110, 46, "Booking"],
+    [290, 190, 110, 46, "Jobber CRM"],
+    [150, 190, 110, 46, "No duplicates"],
+  ],
+  reporting: [
+    [10, 110, 120, 46, "Field form"],
+    [160, 110, 120, 46, "Parse and split"],
+    [330, 40, 110, 46, "Clean rows"],
+    [330, 180, 110, 46, "Review queue"],
+    [470, 110, 120, 46, "Weekly report"],
+  ],
+  ads: [
+    [240, 8, 120, 44, "Ads account"],
+    [90, 108, 130, 44, "Search"],
+    [380, 108, 130, 44, "Performance Max"],
+    [90, 196, 130, 40, "Ad groups"],
+    [380, 196, 130, 40, "Asset groups"],
+    [230, 254, 140, 40, "Conversions"],
+  ],
+  crm: [
+    [20, 110, 130, 46, "Incoming call"],
+    [200, 110, 140, 46, "Match number"],
+    [390, 40, 190, 46, "CRM note written"],
+    [390, 180, 190, 46, "Ambiguous, review"],
+  ],
+  docs: [
+    [10, 40, 120, 46, "Teacher form"],
+    [10, 150, 120, 46, "Curriculum"],
+    [170, 95, 120, 46, "Job queue"],
+    [320, 95, 120, 46, "Preflight"],
+    [470, 95, 120, 46, "Docs built"],
+  ],
+};
+
+const views = {
+  intake: "0 0 600 260",
+  reporting: "0 0 600 260",
+  ads: "0 0 600 306",
+  crm: "0 0 600 260",
+  docs: "0 0 600 240",
+};
+
+const keyIndex = { intake: 3, reporting: 4, ads: 5, crm: 2, docs: 4 };
+
+const set = boxes[kind];
+const key = keyIndex[kind];
+---
+
+<figure class="dgm">
+  <svg viewBox={views[kind]} role="img" aria-label="System diagram">
+    <defs>
+      <marker id={arw} markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto">
+        <path d="M0 0.6 L6 3 L0 5.4" fill="none" stroke="currentColor" stroke-width="1"></path>
+      </marker>
+    </defs>
+
+    <g class="dgm__conn" marker-end={`url(#${arw})`}>
+      {
+        kind === "intake" && (
+          <>
+            <path d="M120 77 H144" />
+            <path d="M260 77 H284" />
+            <path d="M400 77 H424" />
+            <path d="M485 100 V184" />
+            <path d="M430 213 H406" />
+            <path d="M290 213 H266" />
+          </>
+        )
+      }
+      {
+        kind === "reporting" && (
+          <>
+            <path d="M130 133 H154" />
+            <path d="M280 133 H305 V63 H324" />
+            <path d="M280 133 H305 V203 H324" />
+            <path d="M440 63 H455 V133 H464" />
+            <path d="M440 203 H455 V133 H464" />
+          </>
+        )
+      }
+      {
+        kind === "ads" && (
+          <>
+            <path d="M300 52 V80 H155 V102" />
+            <path d="M300 52 V80 H445 V102" />
+            <path d="M155 152 V190" />
+            <path d="M445 152 V190" />
+            <path d="M155 236 V274 H224" />
+            <path d="M445 236 V274 H376" />
+          </>
+        )
+      }
+      {
+        kind === "crm" && (
+          <>
+            <path d="M150 133 H194" />
+            <path d="M340 133 H365 V63 H384" />
+            <path d="M340 133 H365 V203 H384" />
+          </>
+        )
+      }
+      {
+        kind === "docs" && (
+          <>
+            <path d="M130 63 H150 V118 H164" />
+            <path d="M130 173 H150 V118 H164" />
+            <path d="M290 118 H314" />
+            <path d="M440 118 H464" />
+          </>
+        )
+      }
+    </g>
+
+    <g class="dgm__flow">
+      {kind === "intake" && <path d="M10 77 H540 V213 H150" />}
+      {kind === "reporting" && <path d="M10 133 H305 V63 H455 V133 H590" />}
+      {kind === "ads" && <path d="M300 30 V80 H155 V274 H370" />}
+      {kind === "crm" && <path d="M20 133 H365 V63 H580" />}
+      {kind === "docs" && <path d="M10 63 H150 V118 H590" />}
+    </g>
+
+    <g>
+      {
+        set.map((b, i) => (
+          <g class={i === key ? "dgm__box dgm__box--key" : "dgm__box"}>
+            <rect x={b[0]} y={b[1]} width={b[2]} height={b[3]} rx="3" />
+            <text x={b[0] + b[2] / 2} y={b[1] + b[3] / 2 + 1} text-anchor="middle" dominant-baseline="middle">
+              {b[4]}
+            </text>
+          </g>
+        ))
+      }
+    </g>
+  </svg>
+</figure>
+
+<style>
+  .dgm {
+    margin: 0;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: clamp(20px, 3vw, 34px);
+    box-shadow: 0 1px 0 rgba(10, 16, 32, 0.03);
+  }
+
+  .dgm svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .dgm__conn {
+    color: var(--line-strong);
+    stroke: var(--line-strong);
+    stroke-width: 1;
+    fill: none;
+  }
+
+  .dgm__box rect {
+    fill: var(--haze);
+    stroke: var(--line-strong);
+    stroke-width: 1;
+    transition: stroke 0.5s var(--ease), fill 0.5s var(--ease);
+  }
+
+  .dgm__box text {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.01em;
+    fill: var(--ink-2);
+  }
+
+  .dgm__box--key rect {
+    fill: #fff;
+    stroke: var(--blue);
+  }
+
+  .dgm__box--key text {
+    fill: var(--blue);
+  }
+
+  .dgm__flow path {
+    fill: none;
+    stroke: var(--blue);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-dasharray: 46 1800;
+    stroke-dashoffset: 1846;
+    opacity: 0.85;
+  }
+
+  :global([data-reveal].is-in) .dgm__flow path {
+    animation: dgmflow 5.5s linear 0.5s infinite;
+  }
+
+  @keyframes dgmflow {
+    from {
+      stroke-dashoffset: 1846;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dgm__flow path {
+      display: none;
+    }
+  }
+</style>

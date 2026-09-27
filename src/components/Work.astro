@@ -1,0 +1,347 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import Diagram from "./Diagram.astro";
+
+// Real build screenshots. Drop image files into public/work/ and name them with
+// the project id as the prefix, for example: adm-1.png, ppia-1.png
+const shotDir = path.join(process.cwd(), "public", "work");
+let shotFiles = [];
+try {
+  shotFiles = fs
+    .readdirSync(shotDir)
+    .filter((f) => /\.(png|jpe?g|webp|avif)$/i.test(f))
+    .sort();
+} catch (e) {
+  shotFiles = [];
+}
+const shotsFor = (id) => shotFiles.filter((f) => f.toLowerCase().startsWith(id + "-"));
+
+const projects = [
+  {
+    id: "adm",
+    client: "ADM Home Services",
+    title: "From first enquiry to a booked job, without a human touching it",
+    problem:
+      "Enquiries came in faster than anyone could price them, and the good ones went cold waiting for a quote.",
+    built:
+      "A full intake to booking system. The customer describes the job, more than sixty service pricing rules decide the number, an AI-assisted step drafts the estimate, the quote goes out, and the booking writes itself into Jobber through its API. Duplicate clients, properties, jobs, and visits are blocked before they are created, two requests arriving at the same moment cannot collide, and cancellations map back cleanly. Originally built in Zapier, later rebuilt in n8n for control.",
+    stack: ["n8n", "Zapier", "Jobber GraphQL", "Pricing rules", "AI drafting"],
+    diagram: "intake",
+  },
+  {
+    id: "acs-reporting",
+    client: "Alita Construction Services",
+    title: "A weekly report that assembles itself",
+    problem:
+      "Progress on a multi-unit renovation lived in one spreadsheet that depended on people remembering to update it.",
+    built:
+      "Workers submit a short form from the field on their phone. Every entry is parsed and split into individual task rows. Anything clean flows straight into the tracker. Anything unclear is routed to a review queue where a person confirms it in seconds instead of hunting through a sheet. The weekly summary is generated with no manual assembly, replacing an earlier build that could not be trusted.",
+    stack: ["n8n", "Google Sheets", "Apps Script", "Review queue"],
+    diagram: "reporting",
+  },
+  {
+    id: "acs-ads",
+    client: "Alita Construction Services",
+    title: "A Google Ads account built from zero, and the tracking fixed",
+    problem:
+      "There was no advertising account, and once one existed the numbers could not be trusted.",
+    built:
+      "The full account built from scratch. Search and Performance Max campaigns, audience targeting, call and form conversion tracking, video assets, and a verified negative keyword list of one hundred and seventy two terms. I then traced conversion tracking failures across the Google Ads tag, the analytics setup, and the form success event, including failed submissions that were being recorded as wins. Same client as the reporting build above.",
+    stack: ["Google Ads", "GA4", "Tag Manager", "Google Business Profile"],
+    diagram: "ads",
+  },
+  {
+    id: "ppia",
+    client: "Pacific Premier Insurance Associates",
+    title: "Every caller identified before the phone is answered",
+    problem:
+      "Staff had to search the system by hand to work out who was calling, and notes were written after the fact or not at all.",
+    built:
+      "An automation that matches an incoming phone number against the insurance CRM, writes the call note automatically, and routes anything ambiguous to a person rather than guessing. Built on the NowCerts and Momentum API, with number normalising so formatting differences do not break the match.",
+    stack: ["CRM automation", "NowCerts API", "Momentum API", "Safe routing"],
+    diagram: "crm",
+  },
+  {
+    id: "abakada",
+    client: "ABAKADA, independent project",
+    title: "A full term of lesson plans from one form submission",
+    problem:
+      "Teachers were rebuilding the same lesson documents by hand every term.",
+    built:
+      "A generator that turns a teacher's form submission and the curriculum data into complete, editable Google Docs for the whole term. A queue-based workflow runs the jobs in order, preflight checks catch bad input before anything is generated, and support gating keeps the load manageable. Built and given away.",
+    stack: ["Apps Script", "Google Docs API", "Job queue", "Preflight checks"],
+    diagram: "docs",
+  },
+];
+---
+
+<section class="section work" id="work">
+  <div class="wrap">
+    <div class="work__head">
+      <h2 data-reveal>Selected work</h2>
+      <p class="lede" data-reveal style="--delay:120ms">
+        Five systems, each one still doing its job. The diagrams are the real shape of each build,
+        drawn simply. Client data stays out of them.
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap work__list">
+    {
+      projects.map((p, i) => (
+        <article class="proj" id={p.id}>
+          <div class="proj__media" data-reveal>
+            <Diagram kind={p.diagram} />
+
+            {shotsFor(p.id).length > 0 && (
+              <div class="shots">
+                <p class="shots__label tag">From the actual build</p>
+                <ul class="shots__row">
+                  {shotsFor(p.id).map((f, n) => (
+                    <li>
+                      <button class="shot" type="button" data-shot={`/work/${f}`} aria-label={`Open build screenshot ${n + 1} for ${p.client}`}>
+                        <img src={`/work/${f}`} alt="" loading="lazy" decoding="async" />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+
+          <div class="proj__body">
+            <p class="proj__client tag" data-reveal>
+              {p.client}
+            </p>
+            <h3 data-reveal style="--delay:80ms">
+              {p.title}
+            </h3>
+
+            <p class="proj__problem" data-reveal style="--delay:140ms">
+              {p.problem}
+            </p>
+            <p class="proj__built" data-reveal style="--delay:200ms">
+              {p.built}
+            </p>
+
+            <ul class="chips" data-reveal style="--delay:260ms">
+              {p.stack.map((s) => (
+                <li>{s}</li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<div class="lb" data-lb hidden>
+  <button class="lb__close" type="button" data-lb-close aria-label="Close image">Close</button>
+  <img class="lb__img" data-lb-img src="" alt="Screenshot of the real automation build" />
+</div>
+
+<script is:inline>
+  (function () {
+    var lb = document.querySelector("[data-lb]");
+    if (!lb) return;
+    var img = lb.querySelector("[data-lb-img]");
+    var last = null;
+
+    function open(src, btn) {
+      img.src = src;
+      lb.hidden = false;
+      document.body.style.overflow = "hidden";
+      last = btn;
+      lb.querySelector("[data-lb-close]").focus();
+    }
+
+    function close() {
+      lb.hidden = true;
+      img.src = "";
+      document.body.style.overflow = "";
+      if (last) last.focus();
+    }
+
+    document.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-shot]");
+      if (btn) {
+        open(btn.getAttribute("data-shot"), btn);
+        return;
+      }
+      if (e.target.closest("[data-lb-close]") || e.target === lb) close();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !lb.hidden) close();
+    });
+  })();
+</script>
+
+<style>
+  .lb {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    background: rgba(5, 7, 15, 0.92);
+    display: grid;
+    place-items: center;
+    padding: clamp(16px, 4vw, 48px);
+  }
+
+  .lb[hidden] {
+    display: none;
+  }
+
+  .lb__img {
+    max-width: 100%;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 4px;
+    border: 1px solid var(--line-dark);
+  }
+
+  .lb__close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+    color: #fff;
+    padding: 9px 20px;
+    font-size: 0.86rem;
+    cursor: pointer;
+    transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+  }
+
+  .lb__close:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #fff;
+  }
+</style>
+
+<style>
+  .work__head {
+    display: grid;
+    gap: 20px;
+    max-width: 62ch;
+    margin-bottom: clamp(46px, 6vw, 78px);
+  }
+
+  .work__list {
+    display: grid;
+    gap: clamp(54px, 7vw, 108px);
+  }
+
+  .proj {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(30px, 4.5vw, 72px);
+    align-items: center;
+  }
+
+  .proj:nth-child(even) .proj__media {
+    order: 2;
+  }
+
+  .shots {
+    margin-top: 18px;
+    display: grid;
+    gap: 10px;
+  }
+
+  .shots__label {
+    margin: 0;
+  }
+
+  .shots__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .shot {
+    display: block;
+    padding: 0;
+    width: 104px;
+    height: 68px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--haze);
+    cursor: pointer;
+    transition: border-color 0.35s var(--ease), transform 0.35s var(--ease);
+  }
+
+  .shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+  }
+
+  .shot:hover {
+    border-color: var(--blue);
+    transform: translateY(-2px);
+  }
+
+  .proj__body {
+    display: grid;
+    gap: 16px;
+    align-content: start;
+  }
+
+  .proj__client {
+    color: var(--blue);
+    margin: 0;
+  }
+
+  .proj__problem {
+    font-size: clamp(1.02rem, 1.2vw, 1.12rem);
+    color: var(--ink-2);
+    line-height: 1.6;
+    padding-left: 18px;
+    border-left: 2px solid var(--blue);
+  }
+
+  .proj__built {
+    color: var(--mute);
+    font-size: 0.98rem;
+    line-height: 1.68;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .chips li {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    padding: 6px 11px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    color: var(--mute);
+    transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+  }
+
+  .proj:hover .chips li {
+    border-color: var(--line-strong);
+    color: var(--ink-2);
+  }
+
+  @media (max-width: 900px) {
+    .proj {
+      grid-template-columns: 1fr;
+    }
+
+    .proj:nth-child(even) .proj__media {
+      order: 0;
+    }
+  }
+</style>

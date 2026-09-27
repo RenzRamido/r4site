@@ -1,0 +1,220 @@
+---
+const services = [
+  {
+    title: "n8n builds",
+    copy: "Full workflow automation connecting the tools you already pay for. Intake, logic, pricing rules, API calls, retries, and a review queue for anything that does not look right.",
+    icon: "flow",
+  },
+  {
+    title: "Zapier builds",
+    copy: "Lighter automations for teams already on Zapier, built properly with deduplication and error handling instead of a chain that quietly breaks on a Friday.",
+    icon: "bolt",
+  },
+  {
+    title: "Google Ads builds",
+    copy: "Campaign structure from zero, Search and Performance Max, audience targeting, negative keyword management, and conversion tracking that counts real leads only.",
+    icon: "target",
+  },
+  {
+    title: "Quoting and booking systems",
+    copy: "Service pricing rules, automatic estimates, quote delivery while the customer is still interested, and booking that lands straight in your CRM or calendar.",
+    icon: "doc",
+  },
+  {
+    title: "Reporting automation",
+    copy: "Field updates go in from a phone. A clean weekly report comes out. Unclear entries route to a human for one quick look instead of derailing the whole sheet.",
+    icon: "chart",
+  },
+  {
+    title: "Tracking repair and audits",
+    copy: "When the numbers lie, I find out why. Tag setup, analytics events, form success tracking, and the failed submissions that were being counted as wins.",
+    icon: "search",
+  },
+];
+---
+
+<section class="section services" id="services">
+  <div class="wrap services__grid">
+    <div class="services__aside">
+      <div class="services__stick">
+        <h2 data-reveal>What I build</h2>
+        <p class="lede" data-reveal style="--delay:120ms">
+          No packages, no tiers, no menu of things you do not need. Every build starts from the
+          place your work is actually leaking time, and stops when that part runs without you.
+        </p>
+        <a class="btn" href="#contact" data-reveal style="--delay:200ms">Start a conversation</a>
+      </div>
+    </div>
+
+    <ul class="services__list">
+      {
+        services.map((s, i) => (
+          <li class="svc" data-reveal style={`--delay:${i * 70}ms`}>
+            <span class="svc__icon" aria-hidden="true">
+              {s.icon === "flow" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                  <rect x="2.5" y="3.5" width="6" height="5" />
+                  <rect x="15.5" y="9.5" width="6" height="5" />
+                  <rect x="2.5" y="15.5" width="6" height="5" />
+                  <path d="M8.5 6h4.5v6h2.5M8.5 18h4.5v-6" />
+                </svg>
+              )}
+              {s.icon === "bolt" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                  <path d="M13.5 2.5 4.5 13.5h6l-1 8 9-11h-6z" stroke-linejoin="round" />
+                </svg>
+              )}
+              {s.icon === "target" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                  <circle cx="12" cy="12" r="9" />
+                  <circle cx="12" cy="12" r="4.5" />
+                  <circle cx="12" cy="12" r="0.6" fill="currentColor" />
+                </svg>
+              )}
+              {s.icon === "doc" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                  <path d="M5.5 2.5h9l4 4v15h-13z" stroke-linejoin="round" />
+                  <path d="M14.5 2.5v4h4M8.5 11h7M8.5 15h7M8.5 18h4" />
+                </svg>
+              )}
+              {s.icon === "chart" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                  <path d="M3.5 3.5v17h17" />
+                  <path d="M7.5 16.5v-4M12 16.5v-9M16.5 16.5v-6" stroke-linecap="round" />
+                </svg>
+              )}
+              {s.icon === "search" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                  <circle cx="10.5" cy="10.5" r="7" />
+                  <path d="M15.6 15.6 21 21" stroke-linecap="round" />
+                  <path d="M7.5 10.5h6" />
+                </svg>
+              )}
+            </span>
+
+            <div class="svc__text">
+              <h3>{s.title}</h3>
+              <p>{s.copy}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .services {
+    background: var(--haze);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .services__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    gap: clamp(38px, 6vw, 92px);
+  }
+
+  .services__stick {
+    position: sticky;
+    top: 130px;
+    display: grid;
+    gap: 24px;
+    justify-items: start;
+  }
+
+  .services__list {
+    display: grid;
+  }
+
+  .svc {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 22px;
+    padding: 30px 26px 30px 0;
+    border-top: 1px solid var(--line-strong);
+    position: relative;
+    transition: padding 0.45s var(--ease);
+  }
+
+  .svc:last-child {
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .svc::before {
+    content: "";
+    position: absolute;
+    inset: 0 -22px;
+    background: var(--paper);
+    opacity: 0;
+    transform: scaleX(0.97);
+    transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+    z-index: -1;
+  }
+
+  .svc:hover::before {
+    opacity: 1;
+    transform: none;
+  }
+
+  .svc:hover {
+    padding-left: 12px;
+  }
+
+  .svc__icon {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    color: var(--ink-2);
+    transition: color 0.4s var(--ease), border-color 0.4s var(--ease), transform 0.5s var(--ease);
+  }
+
+  .svc__icon svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .svc:hover .svc__icon {
+    color: var(--blue);
+    border-color: var(--blue);
+    transform: rotate(-6deg) scale(1.06);
+  }
+
+  .svc__text {
+    display: grid;
+    gap: 9px;
+  }
+
+  .svc__text p {
+    color: var(--mute);
+    font-size: 0.98rem;
+    line-height: 1.66;
+    max-width: 56ch;
+  }
+
+  @media (max-width: 900px) {
+    .services__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .services__stick {
+      position: static;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .svc {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding-right: 0;
+    }
+
+    .svc:hover {
+      padding-left: 0;
+    }
+  }
+</style>

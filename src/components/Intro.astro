@@ -1,0 +1,104 @@
+---
+const clients = [
+  "Alita Construction Services",
+  "ADM Home Services",
+  "Pacific Premier Insurance Associates",
+  "The Judge's Mansion",
+];
+---
+
+<section class="clients dark" aria-label="Companies I have built for">
+  <div class="wrap clients__inner">
+    <p class="clients__label tag" data-reveal>Built for</p>
+    <ul class="clients__list">
+      {
+        clients.map((c, i) => (
+          <li data-reveal style={`--delay:${100 + i * 90}ms`}>
+            {c}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<section class="section intro">
+  <div class="wrap intro__grid">
+    <div data-reveal>
+      <h2>
+        One operator.<br />The whole system, <span class="accent">end to end</span>.
+      </h2>
+    </div>
+
+    <div class="intro__body">
+      <p class="lede" data-reveal style="--delay:120ms">
+        Most businesses do not lose work because the service is bad. They lose it in the gaps. A
+        lead sits in an inbox for two days. A quote waits on someone to get back to a laptop.
+        Progress updates live in a spreadsheet nobody fills in, so nobody knows where anything
+        stands until a client asks.
+      </p>
+      <p class="lede" data-reveal style="--delay:200ms">
+        I build the connective tissue that closes those gaps. Forms that capture the right
+        information, pricing rules that fire instantly, quotes that go out while the customer is
+        still interested, bookings that land in the system your team already uses, and a report that
+        writes itself every week. You keep your tools. I make them talk to each other.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .clients {
+    border-bottom: 1px solid var(--line-dark);
+    padding-block: 34px;
+  }
+
+  .clients__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 14px 40px;
+  }
+
+  .clients__label {
+    flex: none;
+    margin: 0;
+  }
+
+  .clients__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 34px;
+  }
+
+  .clients__list li {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: rgba(233, 237, 247, 0.72);
+    position: relative;
+    transition: color 0.3s var(--ease);
+  }
+
+  .clients__list li:hover {
+    color: #fff;
+  }
+
+  .intro__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: clamp(32px, 5vw, 80px);
+    align-items: start;
+  }
+
+  .intro__body {
+    display: grid;
+    gap: 22px;
+  }
+
+  @media (max-width: 860px) {
+    .intro__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

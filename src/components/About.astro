@@ -1,0 +1,199 @@
+---
+const notFit = [
+  "You want a logo, a brochure site, or social media posts.",
+  "You want the cheapest possible hourly rate.",
+  "Nobody on your side can answer questions about how the work actually runs.",
+];
+---
+
+<section class="section about" id="about">
+  <div class="wrap about__grid">
+    <div class="about__media" data-reveal>
+      <!-- Replace the contents of .portrait with <img src="/portrait.jpg" alt="Renz Rodney Ramido" /> -->
+      <div class="portrait">
+        <svg viewBox="0 0 400 400" aria-hidden="true">
+          <g stroke="#1e2a4a" stroke-width="1">
+            <path d="M0 100 H400 M0 200 H400 M0 300 H400 M100 0 V400 M200 0 V400 M300 0 V400"></path>
+          </g>
+          <text x="200" y="215" text-anchor="middle" class="portrait__mark">R4</text>
+        </svg>
+      </div>
+      <p class="portrait__cap">Renz Rodney Ramido, operator</p>
+    </div>
+
+    <div class="about__body">
+      <h2 data-reveal>About</h2>
+
+      <p class="lede" data-reveal style="--delay:100ms">
+        I am Renz Rodney Ramido. R4 Systems is me, and that is deliberate. You talk to the person
+        who builds the thing, so nothing is lost between a sales call and the work.
+      </p>
+
+      <p class="lede" data-reveal style="--delay:160ms">
+        My background is operations before it was automation. I ran a business, handled the money,
+        the staffing, and the days when it did not go to plan. That is why I start with where your
+        work actually breaks rather than with a piece of software. The build comes second.
+      </p>
+
+      <p class="lede" data-reveal style="--delay:220ms">
+        I design and ship using AI-assisted development, which is why a system that used to take
+        months takes days. This website is an example of it. Every decision on this page is one I
+        can explain.
+      </p>
+
+      <ul class="creds" data-reveal style="--delay:280ms">
+        <li>Bachelor of Science in Information Technology</li>
+        <li>AI Automation and Technical Operations Consultant</li>
+      </ul>
+
+      <div class="about__cta" data-reveal style="--delay:320ms">
+        <a class="btn" href="/Renz-Rodney-Ramido-CV.pdf" download>Download CV</a>
+        <a class="btn btn--ghost" href="#contact">Send an email</a>
+      </div>
+
+      <aside class="fit" data-reveal style="--delay:380ms">
+        <h3>Probably not a fit if</h3>
+        <ul>
+          {notFit.map((n) => <li>{n}</li>)}
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background: var(--haze);
+    border-top: 1px solid var(--line);
+  }
+
+  .about__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(32px, 5vw, 80px);
+  }
+
+  .about__media {
+    position: sticky;
+    top: 130px;
+  }
+
+  .portrait {
+    aspect-ratio: 1 / 1;
+    background: var(--navy);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .portrait :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .portrait svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .portrait__mark {
+    font-family: var(--mono);
+    font-size: 96px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    fill: #fff;
+  }
+
+  .portrait__cap {
+    margin-top: 14px;
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+
+  .about__body {
+    display: grid;
+    gap: 20px;
+    justify-items: start;
+  }
+
+  .creds {
+    display: grid;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .creds li {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--ink-2);
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .creds li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 6px;
+    height: 1px;
+    background: var(--blue);
+  }
+
+  .about__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .fit {
+    margin-top: 18px;
+    padding: 26px 28px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    width: 100%;
+  }
+
+  .fit h3 {
+    font-size: 1rem;
+    margin-bottom: 14px;
+  }
+
+  .fit ul {
+    display: grid;
+    gap: 10px;
+  }
+
+  .fit li {
+    font-size: 0.94rem;
+    color: var(--mute);
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .fit li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 9px;
+    height: 1px;
+    background: var(--line-strong);
+  }
+
+  @media (max-width: 860px) {
+    .about__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about__media {
+      position: static;
+      max-width: 280px;
+    }
+  }
+</style>

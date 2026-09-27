@@ -1,0 +1,267 @@
+---
+const stages = ["Capture", "Qualify", "Quote", "Book", "Deliver", "Report"];
+---
+
+<section class="hero dark" id="top">
+  <div class="hero__art" aria-hidden="true">
+    <svg viewBox="0 0 720 620" fill="none" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#4fd8ff" stop-opacity="0"></stop>
+          <stop offset="0.5" stop-color="#4fd8ff" stop-opacity="0.9"></stop>
+          <stop offset="1" stop-color="#4fd8ff" stop-opacity="0"></stop>
+        </linearGradient>
+      </defs>
+
+      <g stroke="#1e2a4a" stroke-width="1">
+        <path d="M60 110 H300 V250 H540 V430 H660"></path>
+        <path d="M60 300 H180 V150 H420 V330 H540"></path>
+        <path d="M60 500 H240 V430 H420 V530 H660"></path>
+        <path d="M300 250 V500"></path>
+        <path d="M420 330 V430"></path>
+        <path d="M180 150 V300"></path>
+      </g>
+
+      <g class="hero__pulses" stroke="url(#fade)" stroke-width="1.6" stroke-linecap="round">
+        <path d="M60 110 H300 V250 H540 V430 H660" class="p1"></path>
+        <path d="M60 300 H180 V150 H420 V330 H540" class="p2"></path>
+        <path d="M60 500 H240 V430 H420 V530 H660" class="p3"></path>
+      </g>
+
+      <g class="hero__nodes" fill="#070b16" stroke="#2e3d63" stroke-width="1">
+        <rect x="294" y="244" width="12" height="12"></rect>
+        <rect x="534" y="424" width="12" height="12"></rect>
+        <rect x="174" y="144" width="12" height="12"></rect>
+        <rect x="414" y="324" width="12" height="12"></rect>
+        <rect x="234" y="424" width="12" height="12"></rect>
+        <rect x="414" y="424" width="12" height="12"></rect>
+      </g>
+    </svg>
+  </div>
+
+  <div class="wrap hero__inner">
+    <div class="hero__copy">
+      <h1 data-reveal>
+        Systems that answer<br />every lead in <span class="accent">seconds</span>.
+      </h1>
+
+      <p class="lede" data-reveal style="--delay:120ms">
+        R4 Systems builds the quiet machinery behind a business. Intake, pricing, quotes, booking,
+        and the weekly report that used to eat a full day. Built once, running every day after that.
+      </p>
+
+      <div class="hero__cta" data-reveal style="--delay:220ms">
+        <a class="btn btn--light" href="#contact">Book a 30 minute call</a>
+        <p class="hero__note">
+          No pitch. Tell me what is broken or what you keep doing by hand, and I will tell you what
+          I would do about it.
+        </p>
+      </div>
+    </div>
+
+    <ol class="trace" data-reveal style="--delay:320ms">
+      {
+        stages.map((s, i) => (
+          <li class="trace__item" style={`--i:${i}`}>
+            <span class="trace__dot" />
+            <span class="trace__label">{s}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 92svh;
+    display: flex;
+    align-items: flex-end;
+    padding-top: 156px;
+    padding-bottom: 46px;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 1px;
+    background: var(--line-dark);
+  }
+
+  .hero__art {
+    position: absolute;
+    inset: 0 -6% 0 32%;
+    opacity: 0.85;
+    mask-image: linear-gradient(to right, transparent, #000 34%, #000 78%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 34%, #000 78%, transparent);
+  }
+
+  .hero__art svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero__pulses path {
+    stroke-dasharray: 90 1400;
+    animation: flow 7s linear infinite;
+  }
+
+  .hero__pulses .p2 {
+    animation-duration: 9s;
+    animation-delay: -3s;
+  }
+
+  .hero__pulses .p3 {
+    animation-duration: 11s;
+    animation-delay: -6s;
+  }
+
+  @keyframes flow {
+    from {
+      stroke-dashoffset: 1490;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .hero__nodes rect {
+    animation: blink 4s ease-in-out infinite;
+  }
+
+  .hero__nodes rect:nth-child(2) {
+    animation-delay: 0.7s;
+  }
+  .hero__nodes rect:nth-child(3) {
+    animation-delay: 1.4s;
+  }
+  .hero__nodes rect:nth-child(4) {
+    animation-delay: 2.1s;
+  }
+  .hero__nodes rect:nth-child(5) {
+    animation-delay: 2.8s;
+  }
+  .hero__nodes rect:nth-child(6) {
+    animation-delay: 3.5s;
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      stroke: #2e3d63;
+    }
+    50% {
+      stroke: #4fd8ff;
+    }
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: grid;
+    gap: clamp(54px, 9vh, 96px);
+  }
+
+  .hero__copy {
+    display: grid;
+    gap: 26px;
+    max-width: 860px;
+  }
+
+  .hero__copy .lede {
+    max-width: 50ch;
+  }
+
+  .hero__cta {
+    display: grid;
+    justify-items: start;
+    gap: 16px;
+    margin-top: 6px;
+  }
+
+  .hero__note {
+    max-width: 48ch;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--mute-dark);
+  }
+
+  .trace {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line-dark);
+    padding-top: 18px;
+    margin: 0;
+  }
+
+  .trace__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    padding-right: 12px;
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mute-dark);
+  }
+
+  .trace__dot {
+    width: 6px;
+    height: 6px;
+    flex: none;
+    background: var(--cyan);
+    opacity: 0.35;
+    animation: step 6s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.5s);
+  }
+
+  @keyframes step {
+    0%,
+    82%,
+    100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    8% {
+      opacity: 1;
+      transform: scale(1.5);
+    }
+    30% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .hero__art {
+      inset: 0;
+      opacity: 0.4;
+    }
+
+    .hero__copy {
+      max-width: 100%;
+    }
+
+    .trace {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px 0;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .hero {
+      padding-top: 128px;
+    }
+
+    .hero__cta .btn {
+      width: 100%;
+    }
+  }
+</style>

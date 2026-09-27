@@ -1,0 +1,263 @@
+---
+const email = "RenzRamido@gmail.com";
+const linkedin = "https://www.linkedin.com/in/renz-rodney-ramido-8256a8387";
+// Booking: swap this for the Calendly link once it exists. Until then it opens an email.
+const booking = `mailto:${email}?subject=${encodeURIComponent("Book a 30 minute call")}`;
+---
+
+<section class="section contact dark" id="contact">
+  <div class="wrap contact__grid">
+    <div class="contact__aside">
+      <h2 data-reveal>Tell me what is broken.</h2>
+
+      <p class="lede" data-reveal style="--delay:120ms">
+        Describe it in your own words. You do not need to know what the fix is called. If I am not
+        the right person for it, I will say so.
+      </p>
+
+      <a class="btn btn--light" href={booking} data-reveal style="--delay:150ms">
+        Book a 30 minute call
+      </a>
+
+      <ul class="contact__links" data-reveal style="--delay:180ms">
+        <li>
+          <span class="tag">Email</span>
+          <a href={`mailto:${email}`}>{email}</a>
+        </li>
+        <li>
+          <span class="tag">LinkedIn</span>
+          <a href={linkedin} target="_blank" rel="noopener noreferrer">renz-rodney-ramido</a>
+        </li>
+        <li>
+          <span class="tag">CV</span>
+          <a href="/Renz-Rodney-Ramido-CV.pdf" download>Download the PDF</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="contact__form" data-reveal style="--delay:120ms">
+      <!--
+        No backend yet. Submitting opens the visitor's email app with the message prefilled.
+        To connect a real endpoint later, set action and method on this form and delete the
+        submit handler in the script below.
+      -->
+      <form id="r4-form" novalidate>
+        <div class="field">
+          <label for="f-name">Your name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required placeholder="Your name" />
+        </div>
+
+        <div class="field">
+          <label for="f-email">Email address</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required placeholder="Email address" />
+        </div>
+
+        <div class="field">
+          <label for="f-phone">Phone number</label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="Phone number" />
+        </div>
+
+        <div class="field">
+          <label for="f-msg">Describe your project or how I can help you</label>
+          <textarea id="f-msg" name="message" rows="5" required placeholder="Describe your project or how I can help you"></textarea>
+        </div>
+
+        <button class="submit" type="submit">Send</button>
+        <p class="note" id="f-note" role="status">Opens your email app with the details filled in.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ email }}>
+  (function () {
+    var form = document.getElementById("r4-form");
+    if (!form) return;
+    var note = document.getElementById("f-note");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = form.name.value.trim();
+      var mail = form.email.value.trim();
+      var phone = form.phone.value.trim();
+      var msg = form.message.value.trim();
+
+      if (!name || !mail || !msg) {
+        note.textContent = "Please add your name, your email address, and a short description.";
+        note.classList.add("is-warn");
+        return;
+      }
+
+      note.classList.remove("is-warn");
+      note.textContent = "Opening your email app now.";
+
+      var body =
+        "Name: " + name + "\n" +
+        "Email: " + mail + "\n" +
+        "Phone: " + (phone || "not given") + "\n\n" +
+        msg;
+
+      window.location.href =
+        "mailto:" + email +
+        "?subject=" + encodeURIComponent("Project enquiry from " + name) +
+        "&body=" + encodeURIComponent(body);
+    });
+  })();
+</script>
+
+<style>
+  .contact {
+    background: var(--navy);
+    border-top: 1px solid var(--line-dark);
+  }
+
+  .contact__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: clamp(40px, 6vw, 96px);
+    align-items: start;
+  }
+
+  .contact__aside {
+    display: grid;
+    gap: 22px;
+    justify-items: start;
+  }
+
+  .contact__aside .lede,
+  .contact__links {
+    width: 100%;
+  }
+
+  .contact__links {
+    display: grid;
+    gap: 18px;
+    margin-top: 10px;
+  }
+
+  .contact__links li {
+    display: grid;
+    gap: 5px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line-dark);
+  }
+
+  .contact__links a {
+    font-size: 1.06rem;
+    color: #fff;
+    width: fit-content;
+    position: relative;
+  }
+
+  .contact__links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 1px;
+    background: var(--cyan);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease);
+  }
+
+  .contact__links a:hover::after {
+    transform: scaleX(1);
+  }
+
+  .contact__form {
+    background: var(--navy-2);
+    border: 1px solid var(--line-dark);
+    border-radius: 6px;
+    padding: clamp(24px, 3.4vw, 40px);
+  }
+
+  form {
+    display: grid;
+    gap: 16px;
+  }
+
+  .field {
+    display: grid;
+  }
+
+  label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #27324f;
+    border-radius: 3px;
+    padding: 16px 18px;
+    color: #fff;
+    font-size: 0.97rem;
+    transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 130px;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #6d7796;
+  }
+
+  input:hover,
+  textarea:hover {
+    border-color: #35415f;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--cyan);
+    background: rgba(79, 216, 255, 0.04);
+  }
+
+  .submit {
+    width: 100%;
+    padding: 17px 24px;
+    background: #fff;
+    color: var(--ink);
+    border: 1px solid #fff;
+    border-radius: 3px;
+    font-size: 0.96rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
+  }
+
+  .submit:hover {
+    background: var(--cyan);
+    border-color: var(--cyan);
+  }
+
+  .note {
+    font-family: var(--mono);
+    font-size: 0.73rem;
+    color: var(--mute-dark);
+    letter-spacing: 0.02em;
+  }
+
+  .note.is-warn {
+    color: #ffb4b4;
+  }
+
+  @media (max-width: 860px) {
+    .contact__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+const year = new Date().getFullYear();
+const nav = [
+  { label: "Services", href: "#services" },
+  { label: "Work", href: "#work" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
+---
+
+<footer class="foot dark">
+  <div class="wrap foot__inner">
+    <a class="foot__mark" href="#top">
+      <span class="foot__badge">R4</span>
+      <span>Systems</span>
+    </a>
+
+    <nav aria-label="Footer">
+      <ul class="foot__nav">
+        {
+          nav.map((n) => (
+            <li>
+              <a href={n.href}>{n.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <p class="foot__meta">
+      &copy; {year} R4 Systems. Designed and built by Renz Rodney Ramido.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .foot {
+    background: var(--navy);
+    border-top: 1px solid var(--line-dark);
+    padding-block: 40px;
+  }
+
+  .foot__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 40px;
+  }
+
+  .foot__mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+
+  .foot__badge {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 5px 8px 4px;
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    border-radius: 3px;
+    line-height: 1;
+  }
+
+  .foot__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px;
+  }
+
+  .foot__nav a {
+    font-size: 0.9rem;
+    color: var(--mute-dark);
+    transition: color 0.3s var(--ease);
+  }
+
+  .foot__nav a:hover {
+    color: #fff;
+  }
+
+  .foot__meta {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    color: #6d7796;
+  }
+</style>

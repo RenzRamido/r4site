@@ -1,0 +1,154 @@
+---
+const rowA = [
+  "n8n",
+  "Zapier",
+  "Google Apps Script",
+  "JavaScript",
+  "GraphQL",
+  "REST APIs",
+  "Webhooks",
+  "Google Sheets",
+  "Airtable",
+  "Tally",
+  "Calendly",
+];
+
+const rowB = [
+  "Google Ads",
+  "GA4",
+  "Google Tag Manager",
+  "Google Business Profile",
+  "Jobber",
+  "NowCerts",
+  "Momentum",
+  "Claude Code",
+  "ChatGPT Codex",
+  "OpenAI API",
+  "Google Workspace",
+];
+---
+
+<section class="stack" aria-label="Tools I work with">
+  <div class="wrap stack__head">
+    <p class="tag" data-reveal>The toolkit</p>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      {
+        [0, 1].map(() => (
+          <ul class="marquee__row">
+            {rowA.map((t) => (
+              <li>{t}</li>
+            ))}
+          </ul>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="marquee marquee--rev" aria-hidden="true">
+    <div class="marquee__track">
+      {
+        [0, 1].map(() => (
+          <ul class="marquee__row">
+            {rowB.map((t) => (
+              <li>{t}</li>
+            ))}
+          </ul>
+        ))
+      }
+    </div>
+  </div>
+
+  <p class="sr">
+    Tools I work with: {[...rowA, ...rowB].join(", ")}.
+  </p>
+</section>
+
+<style>
+  .stack {
+    padding-block: clamp(46px, 6vw, 82px);
+    border-top: 1px solid var(--line);
+    background: var(--paper);
+    overflow: hidden;
+  }
+
+  .stack__head {
+    margin-bottom: 26px;
+  }
+
+  .marquee {
+    display: flex;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .marquee + .marquee {
+    margin-top: 14px;
+  }
+
+  .marquee__track {
+    display: flex;
+    width: max-content;
+    animation: slide 46s linear infinite;
+  }
+
+  .marquee--rev .marquee__track {
+    animation-direction: reverse;
+    animation-duration: 54s;
+  }
+
+  .marquee:hover .marquee__track {
+    animation-play-state: paused;
+  }
+
+  .marquee__row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-right: 14px;
+  }
+
+  .marquee__row li {
+    font-family: var(--mono);
+    font-size: 0.84rem;
+    white-space: nowrap;
+    padding: 11px 20px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink-2);
+    background: var(--paper);
+    transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+  }
+
+  .marquee__row li:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  @keyframes slide {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee__track {
+      animation: none;
+    }
+  }
+</style>

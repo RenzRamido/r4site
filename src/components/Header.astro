@@ -1,0 +1,258 @@
+---
+const links = [
+  { label: "Home", href: "#top" },
+  { label: "Services", href: "#services" },
+  { label: "Work", href: "#work" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
+---
+
+<header class="hdr" data-header>
+  <div class="hdr__inner wrap">
+    <a class="mark" href="#top" aria-label="R4 Systems, back to top">
+      <span class="mark__badge">R4</span>
+      <span class="mark__word">Systems</span>
+    </a>
+
+    <nav class="nav" data-nav aria-label="Main">
+      <ul class="nav__list">
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href}>{l.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="btn btn--sm" href="#contact">Book a call</a>
+    </nav>
+
+    <button class="burger" data-menu-toggle aria-expanded="false" aria-label="Open menu">
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .hdr {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
+    border-bottom: 1px solid transparent;
+  }
+
+  .hdr__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    height: 78px;
+  }
+
+  .hdr.is-stuck {
+    background: rgba(255, 255, 255, 0.86);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border-bottom-color: var(--line);
+  }
+
+  .mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #fff;
+    transition: color 0.4s var(--ease);
+    z-index: 2;
+  }
+
+  .mark__badge {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 5px 8px 4px;
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    border-radius: 3px;
+    line-height: 1;
+    transition: border-color 0.4s var(--ease), background 0.4s var(--ease), color 0.4s var(--ease);
+  }
+
+  .mark__word {
+    font-size: 1.02rem;
+  }
+
+  .hdr.is-stuck .mark,
+  .hdr.is-open .mark {
+    color: var(--ink);
+  }
+
+  .hdr.is-stuck .mark__badge,
+  .hdr.is-open .mark__badge {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: #fff;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+  }
+
+  .nav__list {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .nav__list a {
+    position: relative;
+    font-size: 0.93rem;
+    color: rgba(255, 255, 255, 0.82);
+    transition: color 0.3s var(--ease);
+  }
+
+  .nav__list a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease);
+  }
+
+  .nav__list a:hover::after,
+  .nav__list a.is-active::after {
+    transform: scaleX(1);
+  }
+
+  .nav__list a:hover,
+  .nav__list a.is-active {
+    color: #fff;
+  }
+
+  .hdr.is-stuck .nav__list a {
+    color: var(--mute);
+  }
+
+  .hdr.is-stuck .nav__list a:hover,
+  .hdr.is-stuck .nav__list a.is-active {
+    color: var(--ink);
+  }
+
+  .btn--sm {
+    padding: 11px 22px;
+    font-size: 0.88rem;
+    background: #fff;
+    color: var(--ink);
+    border-color: #fff;
+  }
+
+  .btn--sm:hover {
+    color: #fff;
+  }
+
+  .hdr.is-stuck .btn--sm {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+
+  .burger {
+    display: none;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+  }
+
+  .burger span {
+    display: block;
+    height: 1.5px;
+    width: 26px;
+    margin: 6px auto;
+    background: #fff;
+    transition: transform 0.4s var(--ease), background 0.4s var(--ease), opacity 0.3s;
+  }
+
+  .hdr.is-stuck .burger span,
+  .hdr.is-open .burger span {
+    background: var(--ink);
+  }
+
+  .hdr.is-open .burger span:first-child {
+    transform: translateY(3.75px) rotate(45deg);
+  }
+
+  .hdr.is-open .burger span:last-child {
+    transform: translateY(-3.75px) rotate(-45deg);
+  }
+
+  @media (max-width: 900px) {
+    .burger {
+      display: block;
+    }
+
+    .nav {
+      position: fixed;
+      inset: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 26px;
+      padding: 0 var(--gutter);
+      background: var(--paper);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), visibility 0.4s;
+    }
+
+    .hdr.is-open .nav {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+
+    .nav__list {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .nav__list a,
+    .hdr.is-stuck .nav__list a {
+      font-size: clamp(2rem, 9vw, 2.8rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    .nav__list a::after {
+      display: none;
+    }
+
+    .btn--sm,
+    .hdr.is-stuck .btn--sm {
+      margin-top: 14px;
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+      padding: 14px 28px;
+      font-size: 0.95rem;
+    }
+  }
+</style>

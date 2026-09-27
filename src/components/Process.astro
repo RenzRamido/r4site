@@ -1,0 +1,114 @@
+---
+const steps = [
+  {
+    n: "01",
+    title: "Call",
+    copy: "Thirty minutes, free. You tell me where leads are going cold, or what your team keeps redoing by hand every week. I tell you what I would build and roughly what it takes.",
+  },
+  {
+    n: "02",
+    title: "Audit",
+    copy: "A paid teardown of your lead flow, written down: every place a lead can leak, what it is costing you, and the order I would fix it in. Yours to keep. If you hire me to build it, the fee comes off the project.",
+  },
+  {
+    n: "03",
+    title: "Build and run",
+    copy: "I build the system on the tools you already pay for, test it against real leads, and hand it over documented. I stay on to run it only if you want that.",
+  },
+];
+---
+
+<section class="section process dark">
+  <div class="wrap">
+    <div class="process__head">
+      <h2 data-reveal>How working together goes</h2>
+      <p class="lede" data-reveal style="--delay:120ms">
+        Three steps, in order. No long discovery phase, no retainer before there is something
+        running.
+      </p>
+    </div>
+
+    <ol class="process__list">
+      {
+        steps.map((s, i) => (
+          <li class="step" data-reveal style={`--delay:${i * 110}ms`}>
+            <span class="step__n">{s.n}</span>
+            <h3>{s.title}</h3>
+            <p>{s.copy}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .process {
+    background: var(--navy);
+  }
+
+  .process__head {
+    display: grid;
+    gap: 20px;
+    max-width: 60ch;
+    margin-bottom: clamp(48px, 6vw, 80px);
+  }
+
+  .process__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line-dark);
+    border: 1px solid var(--line-dark);
+  }
+
+  .step {
+    background: var(--navy);
+    padding: clamp(28px, 3.2vw, 44px);
+    display: grid;
+    gap: 14px;
+    align-content: start;
+    position: relative;
+    transition: background 0.5s var(--ease);
+  }
+
+  .step::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--cyan);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .step:hover {
+    background: var(--navy-2);
+  }
+
+  .step:hover::after {
+    transform: scaleX(1);
+  }
+
+  .step__n {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: var(--cyan);
+  }
+
+  .step p {
+    color: var(--mute-dark);
+    font-size: 0.98rem;
+    line-height: 1.66;
+  }
+
+  @media (max-width: 860px) {
+    .process__list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
