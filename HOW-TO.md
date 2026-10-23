@@ -24,7 +24,7 @@ Name each file with the project it belongs to, then a dash, then a number:
 - `ppia-1.png` for Pacific Premier Insurance
 - `tjm-1.png` for The Judge's Mansion
 - `abakada-1.png` for ABAKADA
-- `riv-1.png` for the RIV website
+- `site-1.png` for the website project
 
 They appear automatically under the matching project, and clicking one opens it full size.
 
