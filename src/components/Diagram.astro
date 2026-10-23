@@ -13,10 +13,10 @@ const boxes = {
   ],
   reporting: [
     [10, 110, 120, 46, "Field form"],
-    [160, 110, 120, 46, "Parse and split"],
-    [330, 40, 110, 46, "Clean rows"],
+    [160, 110, 120, 46, "Validate"],
+    [330, 40, 110, 46, "Update queue"],
     [330, 180, 110, 46, "Review queue"],
-    [470, 110, 120, 46, "Weekly report"],
+    [470, 110, 120, 46, "Live tracker"],
   ],
   ads: [
     [240, 8, 120, 44, "Ads account"],
@@ -39,6 +39,20 @@ const boxes = {
     [320, 95, 120, 46, "Preflight"],
     [470, 95, 120, 46, "Docs built"],
   ],
+  tjm: [
+    [10, 95, 100, 46, "Audit"],
+    [130, 95, 100, 46, "Bad tag found"],
+    [250, 95, 100, 46, "New campaign"],
+    [370, 95, 100, 46, "Approval"],
+    [490, 95, 100, 46, "Live"],
+  ],
+  site: [
+    [10, 95, 100, 46, "Plan"],
+    [130, 95, 100, 46, "Claude Code"],
+    [250, 95, 100, 46, "GitHub"],
+    [370, 95, 100, 46, "Cloudflare"],
+    [490, 95, 100, 46, "Live site"],
+  ],
 };
 
 const views = {
@@ -47,9 +61,11 @@ const views = {
   ads: "0 0 600 306",
   crm: "0 0 600 260",
   docs: "0 0 600 240",
+  tjm: "0 0 600 240",
+  site: "0 0 600 240",
 };
 
-const keyIndex = { intake: 3, reporting: 4, ads: 5, crm: 2, docs: 4 };
+const keyIndex = { intake: 3, reporting: 4, ads: 5, crm: 2, docs: 4, tjm: 4, site: 4 };
 
 const set = boxes[kind];
 const key = keyIndex[kind];
@@ -118,6 +134,16 @@ const key = keyIndex[kind];
           </>
         )
       }
+      {
+        (kind === "tjm" || kind === "site") && (
+          <>
+            <path d="M110 118 H124" />
+            <path d="M230 118 H244" />
+            <path d="M350 118 H364" />
+            <path d="M470 118 H484" />
+          </>
+        )
+      }
     </g>
 
     <g class="dgm__flow">
@@ -126,6 +152,7 @@ const key = keyIndex[kind];
       {kind === "ads" && <path d="M300 30 V80 H155 V274 H370" />}
       {kind === "crm" && <path d="M20 133 H365 V63 H580" />}
       {kind === "docs" && <path d="M10 63 H150 V118 H590" />}
+      {(kind === "tjm" || kind === "site") && <path d="M10 118 H590" />}
     </g>
 
     <g>

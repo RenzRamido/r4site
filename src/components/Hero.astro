@@ -1,7 +1,7 @@
 ---
-import { booking } from "../data/site.js";
+import { cv } from "../data/site.js";
 
-const stages = ["Capture", "Qualify", "Quote", "Book", "Deliver", "Report"];
+const stages = ["Diagnose", "Design", "Build", "Test", "Document", "Hand over"];
 ---
 
 <section class="hero dark" id="top">
@@ -43,20 +43,26 @@ const stages = ["Capture", "Qualify", "Quote", "Book", "Deliver", "Report"];
 
   <div class="wrap hero__inner">
     <div class="hero__copy">
-      <h1 data-reveal>
-        Systems that answer<br />every lead in <span class="accent">seconds</span>.
+      <p class="tag hero__kicker" data-reveal>Renz Rodney Ramido &middot; Philippines</p>
+
+      <h1 data-reveal style="--delay:60ms">
+        I build automation systems that run in <span class="accent">production</span>.
       </h1>
 
       <p class="lede" data-reveal style="--delay:120ms">
-        R4 Systems builds the quiet machinery behind a business. Intake, pricing, quotes, booking,
-        and the weekly report that used to eat a full day. Built once, running every day after that.
+        AI automation and technical operations specialist. I design, build and document end to end
+        systems in n8n, Zapier and Google Apps Script for owner-led businesses in construction, home
+        services, hospitality and insurance.
       </p>
 
       <div class="hero__cta" data-reveal style="--delay:220ms">
-        <a class="btn btn--light" href={booking} target="_blank" rel="noopener noreferrer">Book a 30 minute call</a>
+        <div class="hero__btns">
+          <a class="btn btn--light" href="#work">See my work</a>
+          <a class="btn btn--ghost" href={cv} download>Download CV</a>
+        </div>
         <p class="hero__note">
-          No pitch. Tell me what is broken or what you keep doing by hand, and I will tell you what
-          I would do about it.
+          Open to full-time remote roles in automation, systems and technical operations.
+          Comfortable working US business hours.
         </p>
       </div>
     </div>
@@ -185,6 +191,16 @@ const stages = ["Capture", "Qualify", "Quote", "Book", "Deliver", "Report"];
     margin-top: 6px;
   }
 
+  .hero__kicker {
+    margin: 0;
+  }
+
+  .hero__btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
   .hero__note {
     max-width: 48ch;
     font-size: 0.92rem;
@@ -262,6 +278,7 @@ const stages = ["Capture", "Qualify", "Quote", "Book", "Deliver", "Report"];
       padding-top: 128px;
     }
 
+    .hero__btns,
     .hero__cta .btn {
       width: 100%;
     }

@@ -1,8 +1,11 @@
 ---
-const notFit = [
-  "You want a logo, a brochure site, or social media posts.",
-  "You want the cheapest possible hourly rate.",
-  "Nobody on your side can answer questions about how the work actually runs.",
+import { cv } from "../data/site.js";
+
+const timeline = [
+  { when: "Now", what: "AI Automation and Technical Operations Consultant, working directly with US business owners" },
+  { when: "2021 to 2024", what: "Owner and operator of my own restaurant: money, staffing and daily operations" },
+  { when: "Earlier", what: "Tenured technical support representative" },
+  { when: "Education", what: "Bachelor of Science in Information Technology" },
 ];
 ---
 
@@ -19,45 +22,45 @@ const notFit = [
           decoding="async"
         />
       </div>
-      <p class="portrait__cap">Renz Rodney Ramido, operator</p>
+      <p class="portrait__cap">Renz Rodney Ramido, Philippines</p>
     </div>
 
     <div class="about__body">
       <h2 data-reveal>About</h2>
 
       <p class="lede" data-reveal style="--delay:100ms">
-        I am Renz Rodney Ramido. R4 Systems is me, and that is deliberate. You talk to the person
-        who builds the thing, so nothing is lost between a sales call and the work.
+        I am Renz Rodney Ramido, an AI automation and technical operations specialist based in the
+        Philippines. I build the systems that take manual work off a business owner's plate, and I
+        stay accountable for them after they go live.
       </p>
 
       <p class="lede" data-reveal style="--delay:160ms">
-        My background is operations before it was automation. I ran a business, handled the money,
-        the staffing, and the days when it did not go to plan. That is why I start with where your
-        work actually breaks rather than with a piece of software. The build comes second.
+        My background is operations before it was automation. I worked in technical support,
+        then ran my own restaurant for three years, handling the money, the staffing and the days
+        that did not go to plan. That is why I start with where the work actually breaks, not with a
+        piece of software.
       </p>
 
       <p class="lede" data-reveal style="--delay:220ms">
-        I design and ship using AI-assisted development, which is why a system that used to take
-        months takes days. This website is an example of it. Every decision on this page is one I
-        can explain.
+        I build with AI-assisted development, which lets me ship quickly without cutting corners.
+        This website is an example of it. Every decision on this page is one I can explain.
       </p>
 
-      <ul class="creds" data-reveal style="--delay:280ms">
-        <li>Bachelor of Science in Information Technology</li>
-        <li>AI Automation and Technical Operations Consultant</li>
-      </ul>
+      <ol class="timeline" data-reveal style="--delay:280ms">
+        {
+          timeline.map((t) => (
+            <li>
+              <span class="timeline__when">{t.when}</span>
+              <span class="timeline__what">{t.what}</span>
+            </li>
+          ))
+        }
+      </ol>
 
       <div class="about__cta" data-reveal style="--delay:320ms">
-        <a class="btn" href="/Renz-Rodney-Ramido-CV.pdf" download>Download CV</a>
-        <a class="btn btn--ghost" href="#contact">Send an email</a>
+        <a class="btn" href={cv} download>Download CV</a>
+        <a class="btn btn--ghost" href="#contact">Get in touch</a>
       </div>
-
-      <aside class="fit" data-reveal style="--delay:380ms">
-        <h3>Probably not a fit if</h3>
-        <ul>
-          {notFit.map((n) => <li>{n}</li>)}
-        </ul>
-      </aside>
     </div>
   </div>
 </section>
@@ -106,28 +109,34 @@ const notFit = [
     justify-items: start;
   }
 
-  .creds {
+  .timeline {
     display: grid;
-    gap: 8px;
+    width: 100%;
     margin-top: 6px;
+    border-top: 1px solid var(--line-strong);
   }
 
-  .creds li {
+  .timeline li {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .timeline__when {
     font-family: var(--mono);
-    font-size: 0.8rem;
-    color: var(--ink-2);
-    padding-left: 16px;
-    position: relative;
+    font-size: 0.76rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--blue);
+    padding-top: 2px;
   }
 
-  .creds li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.62em;
-    width: 6px;
-    height: 1px;
-    background: var(--blue);
+  .timeline__what {
+    font-size: 0.96rem;
+    color: var(--ink-2);
+    line-height: 1.55;
   }
 
   .about__cta {
@@ -137,40 +146,11 @@ const notFit = [
     margin-top: 8px;
   }
 
-  .fit {
-    margin-top: 18px;
-    padding: 26px 28px;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    width: 100%;
-  }
-
-  .fit h3 {
-    font-size: 1rem;
-    margin-bottom: 14px;
-  }
-
-  .fit ul {
-    display: grid;
-    gap: 10px;
-  }
-
-  .fit li {
-    font-size: 0.94rem;
-    color: var(--mute);
-    padding-left: 20px;
-    position: relative;
-  }
-
-  .fit li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.6em;
-    width: 9px;
-    height: 1px;
-    background: var(--line-strong);
+  @media (max-width: 520px) {
+    .timeline li {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
   }
 
   @media (max-width: 860px) {

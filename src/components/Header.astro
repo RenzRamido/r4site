@@ -1,9 +1,9 @@
 ---
-import { booking } from "../data/site.js";
+import { cv } from "../data/site.js";
 
 const links = [
   { label: "Home", href: "#top" },
-  { label: "Services", href: "#services" },
+  { label: "Skills", href: "#skills" },
   { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
@@ -12,9 +12,9 @@ const links = [
 
 <header class="hdr" data-header>
   <div class="hdr__inner wrap">
-    <a class="mark" href="#top" aria-label="R4 Systems, back to top">
-      <span class="mark__badge">R4</span>
-      <span class="mark__word">Systems</span>
+    <a class="mark" href="#top" aria-label="Renz Rodney Ramido, back to top">
+      <span class="mark__badge">RR</span>
+      <span class="mark__word">Renz Rodney Ramido</span>
     </a>
 
     <nav class="nav" data-nav aria-label="Main">
@@ -27,7 +27,7 @@ const links = [
           ))
         }
       </ul>
-      <a class="btn btn--sm" href={booking} target="_blank" rel="noopener noreferrer">Book a call</a>
+      <a class="btn btn--sm" href={cv} download>Download CV</a>
     </nav>
 
     <button class="burger" data-menu-toggle aria-expanded="false" aria-label="Open menu">

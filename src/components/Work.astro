@@ -24,6 +24,7 @@ const projects = [
     title: "From first enquiry to a booked job, without a human touching it",
     problem:
       "Enquiries came in faster than anyone could price them, and the good ones went cold waiting for a quote.",
+    metrics: ["60+ pricing rules", "Zero duplicate records", "Live in production"],
     built:
       "A full intake to booking system. The customer describes the job, more than sixty service pricing rules decide the number, an AI-assisted step drafts the estimate, the quote goes out, and the booking writes itself into Jobber through its API. Duplicate clients, properties, jobs, and visits are blocked before they are created, two requests arriving at the same moment cannot collide, and cancellations map back cleanly. Originally built in Zapier, later rebuilt in n8n for control.",
     stack: ["n8n", "Zapier", "Jobber GraphQL", "Pricing rules", "AI drafting"],
@@ -32,12 +33,13 @@ const projects = [
   {
     id: "acs-reporting",
     client: "Alita Construction Services",
-    title: "A weekly report that assembles itself",
+    title: "Field updates that write themselves into the tracker",
     problem:
-      "Progress on a multi-unit renovation lived in one spreadsheet that depended on people remembering to update it.",
+      "Progress on a 156-unit apartment renovation lived in a huge spreadsheet that someone had to update by hand, cell by cell, from workers' texts.",
+    metrics: ["156 units", "About 3 minutes end to end", "Est. 10 hours a week saved"],
     built:
-      "Workers submit a short form from the field on their phone. Every entry is parsed and split into individual task rows. Anything clean flows straight into the tracker. Anything unclear is routed to a review queue where a person confirms it in seconds instead of hunting through a sheet. The weekly summary is generated with no manual assembly, replacing an earlier build that could not be trusted.",
-    stack: ["n8n", "Google Sheets", "Apps Script", "Review queue"],
+      "Workers report progress on their phones. Every submission is split into individual tasks and checked against five rules before anything is written. Valid updates land in the right tracker cell, which then recalculates completion for that unit. Anything invalid goes to a review queue with a plain-English reason, so a person fixes it in seconds instead of hunting through hundreds of columns. Live in production since October 2026, replacing an earlier build that could not be trusted. The time saving is my estimate, not a measured figure.",
+    stack: ["n8n", "Google Sheets", "Apps Script", "Tally", "Review queue"],
     diagram: "reporting",
   },
   {
@@ -46,10 +48,23 @@ const projects = [
     title: "A Google Ads account built from zero, and the tracking fixed",
     problem:
       "There was no advertising account, and once one existed the numbers could not be trusted.",
+    metrics: ["Built from zero", "172 negative keywords", "Tracking traced end to end"],
     built:
       "The full account built from scratch. Search and Performance Max campaigns, audience targeting, call and form conversion tracking, video assets, and a verified negative keyword list of one hundred and seventy two terms. I then traced conversion tracking failures across the Google Ads tag, the analytics setup, and the form success event, including failed submissions that were being recorded as wins. Same client as the reporting build above.",
     stack: ["Google Ads", "GA4", "Tag Manager", "Google Business Profile"],
     diagram: "ads",
+  },
+  {
+    id: "tjm",
+    client: "The Judge's Mansion",
+    title: "A clean search campaign after an account that could not be trusted",
+    problem:
+      "A boutique historic guesthouse in Columbus had spent on ads for a long time with no booking it could verify, because a broken tag was reporting conversions that never happened.",
+    metrics: ["258 phantom conversions found", "14 keywords", "Owner-approved launch"],
+    built:
+      "I audited the old account, traced the phantom conversions to a broken tag, and kept the legacy campaigns paused as benchmarks instead of deleting them. Then I built a new Search campaign from scratch: tight phrase-match keywords, a fifteen-headline responsive ad built around a direct-booking discount code, a shared negative keyword list, and location targeting limited to people actually in the state. Every change went to the owner as a mockup for approval before it went live.",
+    stack: ["Google Ads", "Conversion audit", "Negative keywords", "Uplisting"],
+    diagram: "tjm",
   },
   {
     id: "ppia",
@@ -57,6 +72,7 @@ const projects = [
     title: "Every caller identified before the phone is answered",
     problem:
       "Staff had to search the system by hand to work out who was calling, and notes were written after the fact or not at all.",
+    metrics: ["Caller matched automatically", "Notes written for staff", "Ambiguous calls to a person"],
     built:
       "An automation that matches an incoming phone number against the insurance CRM, writes the call note automatically, and routes anything ambiguous to a person rather than guessing. Built on the NowCerts and Momentum API, with number normalising so formatting differences do not break the match.",
     stack: ["CRM automation", "NowCerts API", "Momentum API", "Safe routing"],
@@ -68,10 +84,23 @@ const projects = [
     title: "A full term of lesson plans from one form submission",
     problem:
       "Teachers were rebuilding the same lesson documents by hand every term.",
+    metrics: ["A full term per submission", "Editable Google Docs", "Free for teachers"],
     built:
       "A generator that turns a teacher's form submission and the curriculum data into complete, editable Google Docs for the whole term. A queue-based workflow runs the jobs in order, preflight checks catch bad input before anything is generated, and support gating keeps the load manageable. Built and given away.",
     stack: ["Apps Script", "Google Docs API", "Job queue", "Preflight checks"],
     diagram: "docs",
+  },
+  {
+    id: "riv",
+    client: "RIV Information Technology Services, my registered business",
+    title: "A website designed, built and shipped with AI-assisted development",
+    problem:
+      "I needed a site that proved I can deliver a finished product on my own, on a zero budget, that works on a phone as well as a laptop.",
+    metrics: ["Designed and built solo", "Responsive on every screen", "Hosted at no cost"],
+    built:
+      "I planned the structure and copy, built the site with Claude Code and ChatGPT Codex, kept the code in GitHub, and deployed it on Cloudflare Pages. This portfolio was built the same way. Every decision on both sites is one I can explain.",
+    stack: ["Claude Code", "ChatGPT Codex", "GitHub", "Cloudflare Pages"],
+    diagram: "site",
   },
 ];
 ---
@@ -81,8 +110,8 @@ const projects = [
     <div class="work__head">
       <h2 data-reveal>Selected work</h2>
       <p class="lede" data-reveal style="--delay:120ms">
-        Five systems, each one still doing its job. The diagrams are the real shape of each build,
-        drawn simply. Client data stays out of them.
+        Seven projects, each one still doing its job. The diagrams are the real shape of each build,
+        drawn simply. Client data stays out of them, and every client named here agreed to it.
       </p>
     </div>
   </div>
@@ -121,6 +150,13 @@ const projects = [
             <p class="proj__problem" data-reveal style="--delay:140ms">
               {p.problem}
             </p>
+            {p.metrics && (
+              <ul class="metrics" data-reveal style="--delay:170ms">
+                {p.metrics.map((m) => (
+                  <li>{m}</li>
+                ))}
+              </ul>
+            )}
             <p class="proj__built" data-reveal style="--delay:200ms">
               {p.built}
             </p>
@@ -304,6 +340,31 @@ const projects = [
     line-height: 1.6;
     padding-left: 18px;
     border-left: 2px solid var(--blue);
+  }
+
+  .metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+  }
+
+  .metrics li {
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .metrics li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    background: var(--blue);
   }
 
   .proj__built {

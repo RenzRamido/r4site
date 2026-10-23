@@ -1,19 +1,19 @@
 ---
-import { email, linkedin, booking } from "../data/site.js";
+import { email, linkedin, cv } from "../data/site.js";
 ---
 
 <section class="section contact dark" id="contact">
   <div class="wrap contact__grid">
     <div class="contact__aside">
-      <h2 data-reveal>Tell me what is broken.</h2>
+      <h2 data-reveal>Open to full-time remote roles.</h2>
 
       <p class="lede" data-reveal style="--delay:120ms">
-        Describe it in your own words. You do not need to know what the fix is called. If I am not
-        the right person for it, I will say so.
+        Hiring for automation, systems or technical operations work? Send me a message or download
+        my CV. I am based in the Philippines and comfortable working US business hours.
       </p>
 
-      <a class="btn btn--light" href={booking} target="_blank" rel="noopener noreferrer" data-reveal style="--delay:150ms">
-        Book a 30 minute call
+      <a class="btn btn--light" href={cv} download data-reveal style="--delay:150ms">
+        Download CV
       </a>
 
       <ul class="contact__links" data-reveal style="--delay:180ms">
@@ -27,7 +27,7 @@ import { email, linkedin, booking } from "../data/site.js";
         </li>
         <li>
           <span class="tag">CV</span>
-          <a href="/Renz-Rodney-Ramido-CV.pdf" download>Download the PDF</a>
+          <a href={cv} download>Download the PDF</a>
         </li>
       </ul>
     </div>
@@ -50,13 +50,13 @@ import { email, linkedin, booking } from "../data/site.js";
         </div>
 
         <div class="field">
-          <label for="f-phone">Phone number</label>
-          <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="Phone number" />
+          <label for="f-phone">Company or role</label>
+          <input id="f-phone" name="phone" type="text" autocomplete="organization" placeholder="Company or role (optional)" />
         </div>
 
         <div class="field">
-          <label for="f-msg">Describe your project or how I can help you</label>
-          <textarea id="f-msg" name="message" rows="5" required placeholder="Describe your project or how I can help you"></textarea>
+          <label for="f-msg">Tell me about the role</label>
+          <textarea id="f-msg" name="message" rows="5" required placeholder="Tell me about the role or what you need"></textarea>
         </div>
 
         <button class="submit" type="submit">Send</button>
@@ -80,7 +80,7 @@ import { email, linkedin, booking } from "../data/site.js";
       var msg = form.message.value.trim();
 
       if (!name || !mail || !msg) {
-        note.textContent = "Please add your name, your email address, and a short description.";
+        note.textContent = "Please add your name, your email address, and a short message.";
         note.classList.add("is-warn");
         return;
       }
@@ -91,12 +91,12 @@ import { email, linkedin, booking } from "../data/site.js";
       var body =
         "Name: " + name + "\n" +
         "Email: " + mail + "\n" +
-        "Phone: " + (phone || "not given") + "\n\n" +
+        "Company or role: " + (phone || "not given") + "\n\n" +
         msg;
 
       window.location.href =
         "mailto:" + email +
-        "?subject=" + encodeURIComponent("Project enquiry from " + name) +
+        "?subject=" + encodeURIComponent("Portfolio message from " + name) +
         "&body=" + encodeURIComponent(body);
     });
   })();

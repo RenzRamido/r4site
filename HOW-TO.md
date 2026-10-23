@@ -1,4 +1,4 @@
-# R4 Systems website: plain English guide
+# Renz Rodney Ramido portfolio: plain English guide
 
 ## See the site on your computer
 
@@ -11,7 +11,7 @@ Then open the address it prints in your browser.
 ## Add your photo
 
 Put a square photo in the `public` folder and name it `portrait.jpg`.
-Then tell me, and I will switch the R4 square over to your photo.
+Then tell me, and I will switch it in.
 
 ## Add your automation screenshots
 
@@ -22,7 +22,9 @@ Name each file with the project it belongs to, then a dash, then a number:
 - `acs-reporting-1.png` for the Alita weekly report build
 - `acs-ads-1.png` for the Alita Google Ads build
 - `ppia-1.png` for Pacific Premier Insurance
+- `tjm-1.png` for The Judge's Mansion
 - `abakada-1.png` for ABAKADA
+- `riv-1.png` for the RIV website
 
 They appear automatically under the matching project, and clicking one opens it full size.
 
